@@ -6,6 +6,10 @@ __pycache__/
 *.so
 *.egg
 *.egg-info/
+*.ps1
+*.bat
+*.txt
+docs/
 dist/
 build/
 .env
