@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视力中心蓝牙数据汇聚系统 - UI原型</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 顶部导航栏 -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+            <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="2"/>
+            <circle cx="16" cy="16" r="3" fill="currentColor"/>
+          </svg>
+          <span class="logo-text">VisionHub</span>
+        </div>
+      </div>
+      <div class="top-bar-center">
+        <nav class="main-nav">
+          <button class="nav-item active" data-view="dashboard">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+            </svg>
+            <span>总览</span>
+          </button>
+          <button class="nav-item" data-view="devices">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+              <path d="M9 9h6M9 13h6M9 17h4"/>
+            </svg>
+            <span>设备</span>
+          </button>
+          <button class="nav-item" data-view="queue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6,9 6,2 18,2 18,9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            <span>队列</span>
+            <span class="badge">3</span>
+          </button>
+          <button class="nav-item" data-view="history">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12,6 12,12 16,14"/>
+            </svg>
+            <span>历史</span>
+          </button>
+        </nav>
+      </div>
+      <div class="top-bar-right">
+        <button class="icon-btn" title="系统状态">
+          <span class="status-dot pulse"></span>
+        </button>
+        <button class="icon-btn" title="通知">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- 视图1: 总览 Dashboard -->
+    <!-- ============================================ -->
+    <main class="main-content page-view active" id="view-dashboard">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">数据总览</h1>
+          <p class="page-subtitle">实时监控设备状态与打印队列</p>
+        </div>
+        <div class="page-header-right">
+          <button class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7,10 12,15 17,10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            导出报告
+          </button>
+          <button class="btn btn-primary btn-refresh">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23,4 23,10 17,10"/>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+            </svg>
+            刷新数据
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">128</div>
+            <div class="stat-label">今日检查</div>
+          </div>
+          <div class="stat-trend up">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/>
+            </svg>
+            +12.5%
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,11 12,14 22,4"/>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">96</div>
+            <div class="stat-label">已完成打印</div>
+          </div>
+          <div class="stat-trend up">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/>
+            </svg>
+            +8.3%
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12,6 12,12 16,14"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">3</div>
+            <div class="stat-label">待打印</div>
+          </div>
+          <div class="stat-trend neutral">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            0%
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">5</div>
+            <div class="stat-label">在线设备</div>
+          </div>
+          <div class="stat-trend up">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/>
+            </svg>
+            1 台
+          </div>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <div class="card device-list">
+          <div class="card-header">
+            <h2 class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                <path d="M9 9h6M9 13h6M9 17h4"/>
+              </svg>
+              设备状态
+            </h2>
+            <button class="btn-icon" title="刷新">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23,4 23,10 17,10"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="device-item connected"><div class="device-info"><div class="device-status-dot connected"></div><div class="device-details"><div class="device-name">电子视力表 #001</div><div class="device-meta">192.168.1.101 · HTTP</div></div></div><div class="device-actions"><span class="device-badge success">在线</span></div></div>
+            <div class="device-item connected"><div class="device-info"><div class="device-status-dot connected"></div><div class="device-details"><div class="device-name">眼生物测量仪</div><div class="device-meta">AA:BB:CC:DD:01 · 蓝牙</div></div></div><div class="device-actions"><span class="device-badge success">在线</span></div></div>
+            <div class="device-item warning"><div class="device-info"><div class="device-status-dot warning"></div><div class="device-details"><div class="device-name">电脑验光仪</div><div class="device-meta">AA:BB:CC:DD:02 · 蓝牙</div></div></div><div class="device-actions"><span class="device-badge warning">信号弱</span></div></div>
+            <div class="device-item disconnected"><div class="device-info"><div class="device-status-dot disconnected"></div><div class="device-details"><div class="device-name">非接触式眼压计</div><div class="device-meta">未连接</div></div></div><div class="device-actions"><span class="device-badge danger">离线</span></div></div>
+            <div class="device-item connected"><div class="device-info"><div class="device-status-dot connected"></div><div class="device-details"><div class="device-name">热敏打印机</div><div class="device-meta">00:11:22:33:44:55 · 蓝牙</div></div></div><div class="device-actions"><span class="device-badge success">就绪</span></div></div>
+          </div>
+        </div>
+
+        <div class="card print-queue">
+          <div class="card-header">
+            <h2 class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6,9 6,2 18,2 18,9"/>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                <rect x="6" y="14" width="12" height="8"/>
+              </svg>
+              打印队列
+            </h2>
+            <div class="header-actions">
+              <button class="btn btn-sm btn-secondary">清空</button>
+              <button class="btn btn-sm btn-primary">全部打印</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="queue-item"><div class="queue-checkbox"><input type="checkbox" id="dq1" checked><label for="dq1"></label></div><div class="queue-info"><div class="queue-patient">张三 (ID: 001)</div><div class="queue-meta"><span class="queue-devices">视力表 + 生物测量</span><span class="queue-time">14:32</span></div></div><div class="queue-actions"><button class="btn-icon-sm" title="预览"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon-sm" title="打印"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 6,2 18,2 18,9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button></div></div>
+            <div class="queue-item"><div class="queue-checkbox"><input type="checkbox" id="dq2" checked><label for="dq2"></label></div><div class="queue-info"><div class="queue-patient">李四 (ID: 002)</div><div class="queue-meta"><span class="queue-devices">视力表</span><span class="queue-time">14:28</span></div></div><div class="queue-actions"><button class="btn-icon-sm" title="预览"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon-sm" title="打印"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 6,2 18,2 18,9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button></div></div>
+            <div class="queue-item"><div class="queue-checkbox"><input type="checkbox" id="dq3"><label for="dq3"></label></div><div class="queue-info"><div class="queue-patient">王五 (ID: 003)</div><div class="queue-meta"><span class="queue-devices">视力表 + 验光仪</span><span class="queue-time">14:15</span></div></div><div class="queue-actions"><button class="btn-icon-sm" title="预览"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon-sm" title="打印"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 6,2 18,2 18,9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card recent-records">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+            </svg>
+            最近检查记录
+          </h2>
+          <div class="header-actions">
+            <div class="search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" placeholder="搜索患者姓名或ID...">
+            </div>
+            <button class="btn btn-sm btn-secondary nav-to" data-view="history">查看全部</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="data-table">
+            <thead><tr><th>记录ID</th><th>患者姓名</th><th>患者ID</th><th>设备类型</th><th>检查时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td><code>rec_001</code></td><td>张三</td><td>001</td><td>电子视力表</td><td>2026-05-23 14:32</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_002</code></td><td>李四</td><td>002</td><td>电子视力表</td><td>2026-05-23 14:28</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_003</code></td><td>王五</td><td>003</td><td>视力表 + 验光仪</td><td>2026-05-23 14:15</td><td><span class="status-badge warning">待打印</span></td><td><button class="btn-link">打印</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_004</code></td><td>赵六</td><td>004</td><td>眼生物测量仪</td><td>2026-05-23 13:45</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- 视图2: 设备管理 Devices -->
+    <!-- ============================================ -->
+    <main class="main-content page-view" id="view-devices">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">设备管理</h1>
+          <p class="page-subtitle">管理所有蓝牙与网络检查设备</p>
+        </div>
+        <div class="page-header-right">
+          <button class="btn btn-primary" id="btn-scan-device">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12a9 9 0 1 1-6.2-8.6"/><polyline points="21,3 21,9 15,9"/>
+            </svg>
+            扫描设备
+          </button>
+          <button class="btn btn-secondary" id="btn-add-device">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            添加设备
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div><div class="stat-content"><div class="stat-value">8</div><div class="stat-label">设备总数</div></div></div>
+        <div class="stat-card"><div class="stat-icon green"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg></div><div class="stat-content"><div class="stat-value">5</div><div class="stat-label">在线设备</div></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="stat-content"><div class="stat-value">1</div><div class="stat-label">信号弱</div></div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:var(--danger-light);color:var(--danger)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div><div class="stat-content"><div class="stat-value">2</div><div class="stat-label">离线设备</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/>
+            </svg>
+            设备列表
+          </h2>
+          <div class="header-actions">
+            <div class="search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" placeholder="搜索设备名称或地址...">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="data-table">
+            <thead><tr><th>设备名称</th><th>类型</th><th>连接方式</th><th>地址</th><th>状态</th><th>最后在线</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>电子视力表 #001</td><td>视力表</td><td>HTTP</td><td><code>192.168.1.101</code></td><td><span class="status-badge success">在线</span></td><td>2026-05-23 14:32</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+              <tr><td>眼生物测量仪</td><td>生物测量</td><td>蓝牙</td><td><code>AA:BB:CC:DD:01</code></td><td><span class="status-badge success">在线</span></td><td>2026-05-23 14:30</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+              <tr><td>电脑验光仪</td><td>验光仪</td><td>蓝牙</td><td><code>AA:BB:CC:DD:02</code></td><td><span class="status-badge warning">信号弱</span></td><td>2026-05-23 14:20</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+              <tr><td>热敏打印机</td><td>打印机</td><td>蓝牙</td><td><code>00:11:22:33:44:55</code></td><td><span class="status-badge success">就绪</span></td><td>2026-05-23 14:35</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+              <tr><td>非接触式眼压计</td><td>眼压计</td><td>蓝牙</td><td><code>AA:BB:CC:DD:03</code></td><td><span class="status-badge danger">离线</span></td><td>2026-05-22 09:15</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+              <tr><td>电子视力表 #002</td><td>视力表</td><td>HTTP</td><td><code>192.168.1.102</code></td><td><span class="status-badge danger">离线</span></td><td>2026-05-22 16:00</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+              <tr><td>裂隙灯显微镜</td><td>裂隙灯</td><td>蓝牙</td><td><code>AA:BB:CC:DD:04</code></td><td><span class="status-badge success">在线</span></td><td>2026-05-23 14:33</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+              <tr><td>角膜地形图仪</td><td>地形图</td><td>HTTP</td><td><code>192.168.1.103</code></td><td><span class="status-badge success">在线</span></td><td>2026-05-23 14:31</td><td><button class="btn-link">测试</button><button class="btn-link">编辑</button><button class="btn-link" style="color:var(--danger)">删除</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- 视图3: 打印队列 Queue -->
+    <!-- ============================================ -->
+    <main class="main-content page-view" id="view-queue">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">打印队列</h1>
+          <p class="page-subtitle">管理待打印的检查报告</p>
+        </div>
+        <div class="page-header-right">
+          <button class="btn btn-secondary">清空队列</button>
+          <button class="btn btn-primary">全部打印</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon orange"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div><div class="stat-content"><div class="stat-value">3</div><div class="stat-label">待打印</div></div></div>
+        <div class="stat-card"><div class="stat-icon blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 6,2 18,2 18,9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div><div class="stat-content"><div class="stat-value">96</div><div class="stat-label">今日已完成</div></div></div>
+        <div class="stat-card"><div class="stat-icon green"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg></div><div class="stat-content"><div class="stat-value">98.5%</div><div class="stat-label">打印成功率</div></div></div>
+        <div class="stat-card"><div class="stat-icon purple"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div><div class="stat-content"><div class="stat-value">2.3s</div><div class="stat-label">平均打印耗时</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6,9 6,2 18,2 18,9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            待打印队列
+          </h2>
+          <div class="header-actions">
+            <div class="search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" placeholder="搜索患者...">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="data-table">
+            <thead><tr><th style="width:40px"><input type="checkbox"></th><th>记录ID</th><th>患者姓名</th><th>患者ID</th><th>设备类型</th><th>检查时间</th><th>纸张类型</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox" checked></td><td><code>rec_001</code></td><td>张三</td><td>001</td><td>电子视力表 + 眼生物测量仪</td><td>2026-05-23 14:32</td><td>56mm 热敏纸</td><td><button class="btn-link">预览</button><button class="btn-link">打印</button><button class="btn-link" style="color:var(--danger)">移除</button></td></tr>
+              <tr><td><input type="checkbox" checked></td><td><code>rec_002</code></td><td>李四</td><td>002</td><td>电子视力表</td><td>2026-05-23 14:28</td><td>56mm 热敏纸</td><td><button class="btn-link">预览</button><button class="btn-link">打印</button><button class="btn-link" style="color:var(--danger)">移除</button></td></tr>
+              <tr><td><input type="checkbox"></td><td><code>rec_003</code></td><td>王五</td><td>003</td><td>电子视力表 + 电脑验光仪</td><td>2026-05-23 14:15</td><td>56mm 热敏纸</td><td><button class="btn-link">预览</button><button class="btn-link">打印</button><button class="btn-link" style="color:var(--danger)">移除</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- 视图4: 历史记录 History -->
+    <!-- ============================================ -->
+    <main class="main-content page-view" id="view-history">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">历史记录</h1>
+          <p class="page-subtitle">查看所有检查与打印历史</p>
+        </div>
+        <div class="page-header-right">
+          <button class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            导出CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div><div class="stat-content"><div class="stat-value">1,247</div><div class="stat-label">总记录数</div></div></div>
+        <div class="stat-card"><div class="stat-icon green"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,11 12,14 22,4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/></svg></div><div class="stat-content"><div class="stat-value">1,198</div><div class="stat-label">已打印</div></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div><div class="stat-content"><div class="stat-value">49</div><div class="stat-label">未打印</div></div></div>
+        <div class="stat-card"><div class="stat-icon purple"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="stat-content"><div class="stat-value">96.0%</div><div class="stat-label">打印率</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+            </svg>
+            全部记录
+          </h2>
+          <div class="header-actions">
+            <div class="search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" placeholder="搜索患者姓名或ID...">
+            </div>
+            <select class="filter-select">
+              <option>全部状态</option><option>已打印</option><option>未打印</option><option>打印失败</option>
+            </select>
+            <select class="filter-select">
+              <option>全部设备</option><option>电子视力表</option><option>电脑验光仪</option><option>眼生物测量仪</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="data-table">
+            <thead><tr><th>记录ID</th><th>患者姓名</th><th>患者ID</th><th>设备类型</th><th>检查时间</th><th>打印时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td><code>rec_001</code></td><td>张三</td><td>001</td><td>电子视力表 + 眼生物测量仪</td><td>2026-05-23 14:32</td><td>2026-05-23 14:33</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_002</code></td><td>李四</td><td>002</td><td>电子视力表</td><td>2026-05-23 14:28</td><td>2026-05-23 14:29</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_003</code></td><td>王五</td><td>003</td><td>电子视力表 + 电脑验光仪</td><td>2026-05-23 14:15</td><td>-</td><td><span class="status-badge warning">待打印</span></td><td><button class="btn-link">打印</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_004</code></td><td>赵六</td><td>004</td><td>眼生物测量仪</td><td>2026-05-23 13:45</td><td>2026-05-23 13:46</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_005</code></td><td>孙七</td><td>005</td><td>电脑验光仪</td><td>2026-05-23 11:20</td><td>2026-05-23 11:21</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_006</code></td><td>周八</td><td>006</td><td>电子视力表</td><td>2026-05-23 10:05</td><td>2026-05-23 10:06</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_007</code></td><td>吴九</td><td>007</td><td>角膜地形图仪</td><td>2026-05-23 09:30</td><td>2026-05-23 09:31</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+              <tr><td><code>rec_008</code></td><td>郑十</td><td>008</td><td>裂隙灯显微镜</td><td>2026-05-22 16:45</td><td>2026-05-22 16:46</td><td><span class="status-badge success">已打印</span></td><td><button class="btn-link">补打</button><button class="btn-link">详情</button></td></tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span class="pagination-info">共 1,247 条记录，第 1/156 页</span>
+            <div class="pagination-btns">
+              <button class="btn btn-sm btn-secondary" disabled>上一页</button>
+              <button class="btn btn-sm btn-primary">1</button>
+              <button class="btn btn-sm btn-secondary">2</button>
+              <button class="btn btn-sm btn-secondary">3</button>
+              <button class="btn btn-sm btn-secondary">...</button>
+              <button class="btn btn-sm btn-secondary">156</button>
+              <button class="btn btn-sm btn-secondary">下一页</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
